@@ -166,7 +166,7 @@ export class Bundler {
     let rollupFormat: RollupFormat
     if (format.endsWith('-min')) {
       rollupFormat = format.replace(/-min$/, '') as RollupFormat
-      minPlaceholder = '.min'
+      minPlaceholder = 'min'
     } else {
       rollupFormat = format as RollupFormat
     }
@@ -691,7 +691,7 @@ async function printAssets(assets: Assets, title: string) {
 }
 
 function getDefaultFileName(format: RollupFormat) {
-  return format === 'cjs' ? `[name][min][ext]` : `[name].[format][min][ext]`
+  return format === 'cjs' ? `[name].[min][ext]` : `[name].[format].[min][ext]`
 }
 
 export { Config, NormalizedConfig, Options, ConfigOutput }
