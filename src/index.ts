@@ -409,7 +409,7 @@ export class Bundler {
       }
     })
 
-    const defaultFileName = getDefaultFileName(rollupFormat)
+    const defaultFileName = getDefaultFileName(rollupFormat, minify)
     const getFileName = config.output.fileName || defaultFileName
     const fileNameTemplate =
       typeof getFileName === 'function'
@@ -690,8 +690,10 @@ async function printAssets(assets: Assets, title: string) {
   )
 }
 
-function getDefaultFileName(format: RollupFormat) {
-  return format === 'cjs' ? `[name].[min][ext]` : `[name].[format].[min][ext]`
+function getDefaultFileName(format: RollupFormat, minify: boolean) {
+  return format === 'cjs'
+    ? `[name]${minify ? '.' : ''}[min][ext]`
+    : `[name].[format]${minify ? '.' : ''}[min][ext]`
 }
 
 export { Config, NormalizedConfig, Options, ConfigOutput }
